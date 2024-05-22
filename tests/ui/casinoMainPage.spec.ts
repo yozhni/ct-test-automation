@@ -7,5 +7,5 @@ test('Verify the popup Filtes page is opened', async ({ page }) => {
 
     await baseCasinoPage.openCasinoBaseURL();
     await baseCasinoPage.openPopupFilterPage();
-   //await baseCasinoPage.expectPopupFiltersPageIsVisible();
+    await baseCasinoPage.expectPopupFiltersPageIsVisible();
 })

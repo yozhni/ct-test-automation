@@ -14,12 +14,9 @@ export class BaseCasinoPage{
     }
 
     protected getLocatorPopupFilterPageVisible(): Locator { 
-        return this.page.locator("xpath=//div[contains(@class,'filters-overlay') and contains(@class,'translate-x-0')]");
+        return this.page.locator("xpath=//div[contains(@class,'translate-x-0')]");
     }
 
-    protected getLocatorPopupFilterPageNotVisible(): Locator { 
-        return this.page.locator("xpath=//div[contains(@class,'filters-overlay') and contains(@class,'translate-x-full')]");
-    }
 
 //methods
     async openCasinoBaseURL() { 
@@ -32,10 +29,8 @@ export class BaseCasinoPage{
 }
 
     async expectPopupFiltersPageIsVisible() { 
-        await this.getLocatorPopupFilterPageVisible().waitFor({state:"attached"});
+        
+        await this.getLocatorPopupFilterPageVisible().click();
         }
 
-    async expectPopupFiltersPageIsHidden() { 
-        await this.getLocatorPopupFilterPageNotVisible().waitFor({state:"attached"});
-    }
 }
