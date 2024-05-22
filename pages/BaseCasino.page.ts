@@ -17,7 +17,7 @@ export class BaseCasinoPage{
         return this.page.locator("xpath=//div[contains(@class,'filters-overlay') and contains(@class,'translate-x-0')]");
     }
 
-        protected getLocatorPopupFilterPageNotVisible(): Locator { 
+    protected getLocatorPopupFilterPageNotVisible(): Locator { 
         return this.page.locator("xpath=//div[contains(@class,'filters-overlay') and contains(@class,'translate-x-full')]");
     }
 
