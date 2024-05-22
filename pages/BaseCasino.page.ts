@@ -29,13 +29,13 @@ export class BaseCasinoPage{
 
     async openPopupFilterPage() { 
         await this.getLocatorPopupFilterButton().click();
-
-    }
+}
 
     async expectPopupFiltersPageIsVisible() { 
-        await expect(this.getLocatorPopupFilterPageVisible()).toBeVisible();
-    }
+        await this.getLocatorPopupFilterPageVisible().waitFor({state:"attached"});
+        }
 
     async expectPopupFiltersPageIsHidden() { 
+        await this.getLocatorPopupFilterPageNotVisible().waitFor({state:"attached"});
     }
 }
