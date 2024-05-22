@@ -22,7 +22,7 @@ export class BaseCasinoPage{
     async openCasinoBaseURL() { 
         //await this.page.goto('https://www.cloudbet.com/beta/en/casino/lobby');
         await this.page.goto('/beta/casino/lobby');
-        await this.page.waitForLoadState('load', {timeout:10000});
+        await this.page.waitForTimeout(20000);
     }
 
     async openPopupFilterPage() { 
