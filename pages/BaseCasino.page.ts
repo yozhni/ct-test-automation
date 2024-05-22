@@ -22,17 +22,19 @@ export class BaseCasinoPage{
     async openCasinoBaseURL() { 
         //await this.page.goto('https://www.cloudbet.com/beta/en/casino/lobby');
         await this.page.goto('/beta/casino/lobby');
+        await this.page.waitForLoadState('load', {timeout:10000});
     }
 
     async openPopupFilterPage() { 
         const openPopupFilterButton: Locator = this.getLocatorPopupFilterButton();
-        await openPopupFilterButton.waitFor({ state: "visible" });
+        await openPopupFilterButton.waitFor();
         await openPopupFilterButton.click();
 }
 
     async expectPopupFiltersPageIsVisible() { 
         
         const popupFilterPage = this.getLocatorPopupFilterPage()
+        await popupFilterPage.waitFor();
         await popupFilterPage.click();
         }
 
