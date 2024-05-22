@@ -1,41 +1,50 @@
-import {Locator, Page, expect, test} from "@playwright/test"
+import { Locator, Page, expect, test } from "@playwright/test";
 
-export class BaseCasinoPage{ 
+export class BaseCasinoPage {
+  private readonly page: Page;
 
-    private readonly page: Page;
+  constructor(page: Page) {
+    this.page = page;
+  }
 
-    constructor(page:Page) { 
-        this.page = page;
-    }
+  //locators
+  protected getLocatorPopupFilterButton(): Locator {
+    return this.page.locator(
+      "xpath=//button[@id='filters-button' and contains(@class, 'filters-button')]"
+    );
+  }
 
-//locators 
-    protected getLocatorPopupFilterButton():Locator {
-        return this.page.locator("xpath=//button[@id='filters-button' and contains(@class, 'filters-button')]");
-    }
+  protected getLocatorPopupFilterPage(): Locator {
+    return this.page.locator("xpath=//div[contains(@class,'translate-x-0')]");
+  }
 
-    protected getLocatorPopupFilterPage(): Locator { 
-        return this.page.locator("xpath=//div[contains(@class,'translate-x-0')]");
-    }
+  protected getLocatorNewFilterButton(buttonNmae: string): Locator {
+    return this.page.locator(
+      `xpath=//descendant::div[@id='newFiltersContainer']//button//div[text()='${buttonNmae}']`
+    );
+  }
 
+  //methods
+  async openCasinoBaseURL() {
+    await this.page.goto("/beta/en/casino/lobby");
+    await this.page.waitForTimeout(10000);
+  }
 
-//methods
-    async openCasinoBaseURL() { 
-        //await this.page.goto('https://www.cloudbet.com/beta/en/casino/lobby');
-        await this.page.goto('/beta/casino/lobby');
-        await this.page.waitForTimeout(20000);
-    }
+  async openPopupFilterPage() {
+    const openPopupFilterButton: Locator = this.getLocatorPopupFilterButton();
+    await openPopupFilterButton.waitFor();
+    await openPopupFilterButton.click();
+  }
 
-    async openPopupFilterPage() { 
-        const openPopupFilterButton: Locator = this.getLocatorPopupFilterButton();
-        await openPopupFilterButton.waitFor();
-        await openPopupFilterButton.click();
-}
+  async expectPopupFiltersPageIsVisible() {
+    const popupFilterPage = this.getLocatorPopupFilterPage();
+    await popupFilterPage.waitFor();
+    await popupFilterPage.click();
+  }
 
-    async expectPopupFiltersPageIsVisible() { 
-        
-        const popupFilterPage = this.getLocatorPopupFilterPage()
-        await popupFilterPage.waitFor();
-        await popupFilterPage.click();
-        }
-
+  async filterByNewFilterByButton(buttonName: string) {
+    const filterButton = this.getLocatorNewFilterButton(buttonName);
+    await filterButton.scrollIntoViewIfNeeded();
+    await filterButton.click();
+  }
 }
