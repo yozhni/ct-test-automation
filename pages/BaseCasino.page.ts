@@ -13,7 +13,7 @@ export class BaseCasinoPage{
         return this.page.locator("xpath=//button[@id='filters-button' and contains(@class, 'filters-button')]");
     }
 
-    protected getLocatorPopupFilterPageVisible(): Locator { 
+    protected getLocatorPopupFilterPage(): Locator { 
         return this.page.locator("xpath=//div[contains(@class,'translate-x-0')]");
     }
 
@@ -25,12 +25,15 @@ export class BaseCasinoPage{
     }
 
     async openPopupFilterPage() { 
-        await this.getLocatorPopupFilterButton().click();
+        const openPopupFilterButton: Locator = this.getLocatorPopupFilterButton();
+        await openPopupFilterButton.waitFor({ state: "visible" });
+        await openPopupFilterButton.click();
 }
 
     async expectPopupFiltersPageIsVisible() { 
         
-        await this.getLocatorPopupFilterPageVisible().click();
+        const popupFilterPage = this.getLocatorPopupFilterPage()
+        await popupFilterPage.click();
         }
 
 }
