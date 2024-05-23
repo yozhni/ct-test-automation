@@ -4,7 +4,9 @@ on:
     branches: [main, master]
   pull_request:
     branches: [main, master]
-permissions: write-all
+permissions:
+  id-toket: write
+  contents: read
 jobs:
   test:
     timeout-minutes: 60
