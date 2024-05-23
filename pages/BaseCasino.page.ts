@@ -24,10 +24,15 @@ export class BaseCasinoPage {
     );
   }
 
+  
   //methods
+
+  /**
+   * method to open casino URL
+   */
   async openCasinoBaseURL() {
     await this.page.goto("/beta/en/casino/lobby");
-    await this.page.waitForTimeout(10000);
+    await this.page.waitForLoadState();
   }
 
   async openPopupFilterPage() {

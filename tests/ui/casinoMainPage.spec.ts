@@ -1,11 +1,14 @@
 import { expect, test } from "@playwright/test";
 import { BaseCasinoPage } from "../../pages/BaseCasino.page";
 
-test("Verify the popup Filtes page is opened", async ({ page }) => {
-  const baseCasinoPage = new BaseCasinoPage(page);
+let filterValues: string[] = ["Cold", "New"];
 
-  await baseCasinoPage.openCasinoBaseURL();
-  await baseCasinoPage.filterByNewFilterByButton("Cold");
-  // await baseCasinoPage.openPopupFilterPage();
-  //await baseCasinoPage.expectPopupFiltersPageIsVisible();
+filterValues.forEach((filterValue: string) => {
+  test(`Verify the new filter on main Csino page is clickable and filtered by Attribute = ${filterValue} `, async ({
+    page,
+  }) => {
+    const baseCasinoPage = new BaseCasinoPage(page);
+    await baseCasinoPage.openCasinoBaseURL();
+    await baseCasinoPage.filterByNewFilterByButton(filterValue);
+  });
 });
