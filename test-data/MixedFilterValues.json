@@ -1,0 +1,11 @@
+{
+  "NoSearchResults": {
+    "attributes": ["Cold", "Hot"],
+    "studioNames": ["Vivo"]
+  },
+
+  "TestresultsWithSearchResults": {
+    "attributes": ["New"],
+    "studioNames": ["Pragmatic Play"]
+  }
+}

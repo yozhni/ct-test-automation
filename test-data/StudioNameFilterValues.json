@@ -1,0 +1,12 @@
+{
+  "studioNames": [
+    "Vivo",
+    "Playtech",
+    "One Touch",
+    "Betsoft",
+    "Atomic Slot Lab"
+  ],
+  "defaultSort": "Recommended",
+  "defaultView": "More",
+  "studioNamesToTestSeveralStudioNamesAtOnce": ["Live88", "Four Leaf Gaming"]
+}

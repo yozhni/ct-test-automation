@@ -10,21 +10,22 @@ export class BaseCasinoPage {
   //locators
   protected getLocatorPopupFilterButton(): Locator {
     return this.page.locator(
-      "xpath=//button[@id='filters-button' and contains(@class, 'filters-button')]"
+      "//button[@id='filters-button' and contains(@class, 'filters-button')]"
     );
-  }
-
-  protected getLocatorPopupFilterPage(): Locator {
-    return this.page.locator("xpath=//div[contains(@class,'translate-x-0')]");
   }
 
   protected getLocatorNewFilterButton(buttonNmae: string): Locator {
     return this.page.locator(
-      `xpath=//descendant::div[@id='newFiltersContainer']//button//div[text()='${buttonNmae}']`
+      `//descendant::div[@id='newFiltersContainer']//button//div[text()='${buttonNmae}']`
     );
   }
 
-  
+  protected getLocatorSearchResults(): Locator {
+    return this.page.locator(
+      `//span[text()='Search Results']/following-sibling::span`
+    );
+  }
+
   //methods
 
   /**
@@ -32,7 +33,7 @@ export class BaseCasinoPage {
    */
   async openCasinoBaseURL() {
     await this.page.goto("/beta/en/casino/lobby");
-    await this.page.waitForLoadState();
+    await this.page.waitForLoadState("domcontentloaded");
   }
 
   async openPopupFilterPage() {
@@ -41,15 +42,20 @@ export class BaseCasinoPage {
     await openPopupFilterButton.click();
   }
 
-  async expectPopupFiltersPageIsVisible() {
-    const popupFilterPage = this.getLocatorPopupFilterPage();
-    await popupFilterPage.waitFor();
-    await popupFilterPage.click();
-  }
-
   async filterByNewFilterByButton(buttonName: string) {
     const filterButton = this.getLocatorNewFilterButton(buttonName);
     await filterButton.scrollIntoViewIfNeeded();
     await filterButton.click();
+  }
+
+  async waitForSearchResultsAreLoaded() {
+    await this.getLocatorSearchResults().waitFor();
+    await this.getLocatorSearchResults().click();
+  }
+
+  async extractSearchResultValue() {
+    const searchResultValue =
+      await this.getLocatorSearchResults().textContent();
+    return searchResultValue;
   }
 }
