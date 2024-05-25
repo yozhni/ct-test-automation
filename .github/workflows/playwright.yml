@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       VPN_LOCATION: ${{ github.event.inputs.location || 'Japan - Tokyo' }}
+      REPORT_PORTAL_API_KEY: ${{ secrets.REPORT_PORTAL_API_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

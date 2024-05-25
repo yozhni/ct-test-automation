@@ -1,6 +1,4 @@
 import { defineConfig, devices } from "@playwright/test";
-import dotenv from "dotenv";
-import path from "path";
 
 /**
  * Read environment variables from file.
@@ -8,12 +6,29 @@ import path from "path";
  */
 require("dotenv").config();
 
+// Report Portal configuration
+let apiKey = process.env.REPORT_PORTAL_API_KEY
+const RPconfig = {
+
+  apiKey: apiKey,
+  endpoint: 'https://demo.reportportal.io/api/v1',
+  project: 'default_personal',
+  launch: 'CT-Test',
+  attributes: [
+    {
+      key: 'agent',
+      value: 'playwright',
+    }
+  ],
+  includeTestSteps: true
+};
+
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: "html",
+  reporter: [['@reportportal/agent-js-playwright', RPconfig], ["html"]],
   testDir: "./tests",
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -33,10 +48,10 @@ export default defineConfig({
       process.env.ENV === "dev"
         ? "https://www.cloudbet.com/"
         : process.env.ENV === "uat"
-        ? "https://www.cloudbet.com/"
-        : process.env.ENV === "prod"
-        ? "https://www.cloudbet.com/"
-        : "https://www.cloudbet.com/",
+          ? "https://www.cloudbet.com/"
+          : process.env.ENV === "prod"
+            ? "https://www.cloudbet.com/"
+            : "https://www.cloudbet.com/",
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     //trace: "on-first-retry",
     screenshot: "only-on-failure",
