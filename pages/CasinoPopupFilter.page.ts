@@ -150,14 +150,14 @@ export class CasinoPopupFiterPage {
     await this.getLocatorByStudioNameViewMoreLess(setLessOrMore).click();
   }
 
-  async extructNumberOfGamesForStudioName(studioName: string) {
+  async extractNumberOfGamesForStudioName(studioName: string) {
     const seeResultValue = await this.getLocatorNumberOfGamesForSelectedStudio(
       studioName
     ).textContent();
     return seeResultValue;
   }
 
-  async extructNumbeFromSeeResults() {
+  async extractNumbeFromSeeResults() {
     const seeRusultsNumber =
       await this.getLocatorSeeResultsPopupPage().textContent();
     return seeRusultsNumber != "No results"
@@ -169,8 +169,8 @@ export class CasinoPopupFiterPage {
     studioName: string
   ) {
     let sumOfTestResults = 0;
-    const seeResultsNumber = await this.extructNumbeFromSeeResults();
-    const studionumberOfGames = await this.extructNumberOfGamesForStudioName(
+    const seeResultsNumber = await this.extractNumbeFromSeeResults();
+    const studionumberOfGames = await this.extractNumberOfGamesForStudioName(
       studioName
     );
 

@@ -39,13 +39,8 @@ export default defineConfig({
         : "https://www.cloudbet.com/",
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     //trace: "on-first-retry",
+    screenshot: "only-on-failure",
     trace: "retain-on-first-failure",
-
-    // Emulates the user locale.
-    locale: "ja-JP",
-
-    // Emulates the user timezone.
-    timezoneId: "Asia/Tokyo",
   },
 
   /* Configure projects for major browsers */

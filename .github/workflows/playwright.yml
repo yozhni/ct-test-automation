@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       location:
-        description: 'VPN location'
+        description: "VPN location"
         required: true
-        default: 'Japan - Tokyo'
+        default: "Japan - Tokyo"
 jobs:
   test:
     timeout-minutes: 60
@@ -31,7 +31,7 @@ jobs:
       - name: Connect to VPN
         run: expressvpn connect "${{ env.VPN_LOCATION }}"
       - name: Run Playwright tests
-        run: npx playwright test casinoMainPage.spec.ts
+        run: npx playwright test
       - uses: actions/upload-artifact@v4
         if: always()
         with:

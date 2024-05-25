@@ -24,14 +24,16 @@ test.describe("Veriry the games filter by Attributes.", () => {
       await casinoPopupFiterPage.clickOnSeeTestResultsButton();
       await baseCasinoPage.waitForSearchResultsAreLoaded();
       expect(await baseCasinoPage.extractSearchResultValue()).toEqual(
-        await casinoPopupFiterPage.extructNumbeFromSeeResults()
+        await casinoPopupFiterPage.extractNumbeFromSeeResults()
       );
     });
   });
 
   test(`Filter by several Attribute: ${sameAttributes.join(
     ", "
-  )}. Clear filter by 'Clear all' button`, async ({ page }) => {
+  )}. Clear filter by 'Clear all' button. Check the FIlter view is correct.`, async ({
+    page,
+  }) => {
     const baseCasinoPage = new BaseCasinoPage(page);
     const casinoPopupFiterPage = new CasinoPopupFiterPage(page);
     await baseCasinoPage.openCasinoBaseURL();
@@ -116,9 +118,9 @@ test.describe("Verify filter by Studio Name", () => {
   });
 
   test(`Change sort order of Studio names. 
-  Select to displayed More Studio Names.
+  Select to display More Studio Names.
   Filter by several Studio names ${studioNameToTestAtOnce.join(", ")}.
-  Select to display Less Studio names 
+  Select to display Less Studio names .
   Click the 'See Results", check search results are displayed correctly on main page `, async ({
     page,
   }) => {
@@ -136,7 +138,7 @@ test.describe("Verify filter by Studio Name", () => {
     await casinoPopupFiterPage.clickOnSeeTestResultsButton();
     await baseCasinoPage.waitForSearchResultsAreLoaded();
     expect(await baseCasinoPage.extractSearchResultValue()).toEqual(
-      await casinoPopupFiterPage.extructNumbeFromSeeResults()
+      await casinoPopupFiterPage.extractNumbeFromSeeResults()
     );
   });
 });
@@ -162,7 +164,7 @@ test.describe("Verify filter by several groups of Field: ", () => {
     for (const studioName of studioNamesNoSearchResults) {
       await casinoPopupFiterPage.filterByStudioName(studioName);
     }
-    expect(await casinoPopupFiterPage.extructNumbeFromSeeResults()).toEqual(
+    expect(await casinoPopupFiterPage.extractNumbeFromSeeResults()).toEqual(
       "No results"
     );
   });
@@ -192,7 +194,7 @@ test.describe("Verify filter by several groups of Field: ", () => {
     await casinoPopupFiterPage.clickOnSeeTestResultsButton();
     await baseCasinoPage.waitForSearchResultsAreLoaded();
     expect(await baseCasinoPage.extractSearchResultValue()).toEqual(
-      await casinoPopupFiterPage.extructNumbeFromSeeResults()
+      await casinoPopupFiterPage.extractNumbeFromSeeResults()
     );
   });
 });

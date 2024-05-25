@@ -3,22 +3,9 @@
     "Feature Buy",
     "Bonus Rounds",
     "Trending",
-    "New",
-    "Hot",
-    "Cold",
-    "High Roller",
-    "High RTP",
     "Auto Play"
   ],
-  "mainPageFilters": [
-    "Hot",
-    "Cold",
-    "New",
-    "Pragmatic Play",
-    "Trending",
-    "High RTP"
-  ],
+  "mainPageFilters": ["Hot", "Cold", "New"],
   "sameFilters": ["Hot", "Cold", "Trending", "High RTP"],
-
   "mixAttributes": ["Hot", "Auto Play"]
 }
