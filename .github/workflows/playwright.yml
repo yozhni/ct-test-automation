@@ -4,13 +4,18 @@ on:
     branches: [main, master]
   pull_request:
     branches: [main, master]
-permissions:
-  id-token: write
-  contents: read
+  workflow_dispatch:
+    inputs:
+      location:
+        description: 'VPN location'
+        required: true
+        default: 'Japan - Tokyo'
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      VPN_LOCATION: ${{ github.event.inputs.location || 'Japan - Tokyo' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -20,6 +25,11 @@ jobs:
         run: npm ci
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+      - uses: ./.github/actions/vpn
+        with:
+          activation-code: ${{ secrets.EXPRESSVPN_ACTIVATION_CODE }}
+      - name: Connect to VPN
+        run: expressvpn connect "${{ env.VPN_LOCATION }}"
       - name: Run Playwright tests
         run: npx playwright test casinoMainPage.spec.ts
       - uses: actions/upload-artifact@v4
@@ -28,3 +38,6 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+      - name: Disconnect from VPN
+        if: always()
+        run: expressvpn disconnect
