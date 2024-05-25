@@ -73,7 +73,7 @@ test.describe("Veriry the games filter by Attributes.", () => {
   });
 });
 
-test.describe("Verify filter by Studio Name.", () => {
+test.describe("Verify filter by Studio Name", () => {
   let studioNames: string[] = studioNamesData.studioNames;
   let studioNamesDefaultSort: string = studioNamesData.defaultSort;
   let studioNamesDefaultView: string = studioNamesData.defaultView;
