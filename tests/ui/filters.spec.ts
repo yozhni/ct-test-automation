@@ -1,13 +1,12 @@
 import test, { expect } from "@playwright/test";
-import { FilterPage } from "../../ui/filter/FilterPage";
-import { MainPage } from "../../ui/main/MainPage";
-import { AttributesFilter } from "../../ui/filter/AttributesFilter";
+import { FilterPage } from "../../ui_pages/filter/FilterPage";
+import { MainPage } from "../../ui_pages/main/MainPage";
+import { AttributesFilter } from "../../ui_pages/filter/AttributesFilter";
+import TestData from "../../test-data/filtersValues.json";
 
 test.describe("Filter Tests", () => {
-
   test("it should filter by studios", async ({ page }) => {
-
-    const studios = ["Vivo", "Playtech", "Atomic Slot Lab"]
+    const studios = TestData.studios;
     const mainPage: MainPage = new MainPage(page);
     const filterPage: FilterPage = new FilterPage(page);
 
@@ -15,7 +14,7 @@ test.describe("Filter Tests", () => {
       await mainPage.open();
     });
 
-    await test.step("filter by Studios", async () => {
+    await test.step("filter by Studios. ", async () => {
       let total: number = 0;
 
       await mainPage.toggleFilter();
@@ -32,7 +31,6 @@ test.describe("Filter Tests", () => {
 
       console.log(`expected studios total: ${total}`);
       expect(await filterPage.getResultsCount()).toEqual(total);
-
     });
 
     await test.step("click 'See results'", async () => {
@@ -47,8 +45,7 @@ test.describe("Filter Tests", () => {
   });
 
   test("it should filter by Themes", async ({ page }) => {
-
-    const themes = ["Egyptian", "Sea", "Space"]
+    const themes = TestData.themes;
     const mainPage: MainPage = new MainPage(page);
     const filterPage: FilterPage = new FilterPage(page);
 
@@ -73,7 +70,6 @@ test.describe("Filter Tests", () => {
 
       console.log(`expected themes total: ${total}`);
       expect(await filterPage.getResultsCount()).toEqual(total);
-
     });
 
     await test.step("click 'See results'", async () => {
@@ -88,7 +84,7 @@ test.describe("Filter Tests", () => {
   });
 
   test("it should filter by Attributes", async ({ page }) => {
-    const attributes = ["Hot", "Trending", "Auto Play"]
+    const attributes = TestData.attributes;
     const mainPage: MainPage = new MainPage(page);
     const filterPage: FilterPage = new FilterPage(page);
 
@@ -114,6 +110,5 @@ test.describe("Filter Tests", () => {
         await filterItem.expectToggled();
       }
     });
-
   });
 });

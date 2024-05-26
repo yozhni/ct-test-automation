@@ -1,33 +1,42 @@
 # ct-test-automation
 
-
 ## setup
-1. Install node
+
+1. Install node.js
 2. Install framework by running `npm install`
 3. Install browsers set for playwright by running `npx playwright install`
 
 ## set env
+
 Set env value in .env
 (now all envs are looking at same link)
 
-## run 
-to run under all browsers:
-```npx playwright test``` 
+Values to select in Filter can be chaged in ../../test-data/filtersValues.json
+
+## run
+
+to run under all available browsers:
+`npx playwright test`
 
 to run under spesific browser:
-```npx playwright test --project=chromium #webkit #firefox```
+`npx playwright test --project=chromium`
+`npx playwright test --project=firefox`
 
-actions job now running all of test cases under all of the browsers
+please mind the webkit project is disabled as it's buggy and needs extra time to investigate
 
-## view report 
-please note I'm using free account for report portal, so I need to update api key every day to use direct link to report
+actions job now running all of test cases under chromium and firefox
+
+## view report
+
+please note I'm using free account for report portal, so I need to update api key every day to use direct link to report OOTB
+
 also, please, mind the report should be refreshed daily as it's using free report portal account
+
 html report is awailable for download without limits from Actions
 
 ## things to improve
-1. split CasinoPopupFilter.page.ts by filters groups for convinient use
-2. add test cases to cover rest of filter groups
-3. add mobile devices testing
-4. move extruction of test data away from test cases
-5. to improve test cases performance it's posible to move initialisation actions in config
-6. to improve report usability 
+
+1. add test cases to cover rest of filter groups (like "verify the selected filtes are moving forward")
+2. add mobile devices mode
+3. move extruction of test data away from test cases
+4. improve report
