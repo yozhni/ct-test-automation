@@ -1,6 +1,7 @@
 import test, { expect } from "@playwright/test";
 import { FilterPage } from "../../ui/filter/FilterPage";
 import { MainPage } from "../../ui/main/MainPage";
+import { AttributesFilter } from "../../ui/filter/AttributesFilter";
 
 test.describe("Filter Tests", () => {
 
@@ -16,7 +17,7 @@ test.describe("Filter Tests", () => {
 
     await test.step("filter by Studios", async () => {
       let total: number = 0;
-      
+
       await mainPage.toggleFilter();
       for (const studio of studios) {
         const filterItem = await filterPage.studios().getByName(studio);
@@ -34,17 +35,13 @@ test.describe("Filter Tests", () => {
 
     });
 
-    await test.step("check filter results count", async () => {
-
-    });
-
     await test.step("click 'See results'", async () => {
       await filterPage.seeResults();
     });
 
     await test.step("check search results", async () => {
       for (const studio of studios) {
-        await expect(mainPage.filters).toHaveText(new RegExp(studio));
+        await (await mainPage.getFilterByName(studio)).expectToggled();
       }
     });
   });
@@ -62,7 +59,7 @@ test.describe("Filter Tests", () => {
     await test.step("filter by themes", async () => {
       let total: number = 0;
 
-      await mainPage.toggleFilter();      
+      await mainPage.toggleFilter();
       for (const theme of themes) {
         const filterItem = await filterPage.themes().getByName(theme);
         await filterItem.expectUnToggled();
@@ -79,18 +76,44 @@ test.describe("Filter Tests", () => {
 
     });
 
-    await test.step("check filter results count", async () => {
-
-    });
-
     await test.step("click 'See results'", async () => {
       await filterPage.seeResults();
     });
 
     await test.step("check search results", async () => {
       for (const theme of themes) {
-        await expect(mainPage.filters).toHaveText(new RegExp(theme));
+        await (await mainPage.getFilterByName(theme)).expectToggled();
       }
     });
+  });
+
+  test("it should filter by Attributes", async ({ page }) => {
+    const attributes = ["Hot", "Trending", "Auto Play"]
+    const mainPage: MainPage = new MainPage(page);
+    const filterPage: FilterPage = new FilterPage(page);
+
+    await test.step("open main page", async () => {
+      await mainPage.open();
+    });
+
+    await test.step("filter by Attributes", async () => {
+      await mainPage.toggleFilter();
+      const attributesFilter: AttributesFilter = filterPage.attributes();
+
+      for (const attribute of attributes) {
+        const filterItem = await attributesFilter.getByName(attribute);
+        await filterItem.toggle();
+        await filterItem.expectToggled();
+      }
+      await filterPage.seeResults();
+    });
+
+    await test.step("check search results", async () => {
+      for (const attribute of attributes) {
+        const filterItem = await mainPage.getFilterByName(attribute);
+        await filterItem.expectToggled();
+      }
+    });
+
   });
 });

@@ -1,5 +1,6 @@
 import { type Locator, type Page } from "@playwright/test";
 import { CheckBoxFilter } from "./CheckBoxFilter";
+import { AttributesFilter } from "./AttributesFilter";
 
 export class FilterPage {
   _root: Locator;
@@ -20,6 +21,12 @@ export class FilterPage {
   public themes(): CheckBoxFilter {
     return new CheckBoxFilter(
       this._root.filter({ hasText: "Themes" }));
+  }
+
+  public attributes():AttributesFilter {
+    const locators = this._root.locator("div>div").filter({ hasText: "Attributes"});
+    const locator = locators.last();
+    return new AttributesFilter(locator);
   }
 
   public async seeResults() {
