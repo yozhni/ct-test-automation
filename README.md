@@ -19,6 +19,7 @@ to run under all available browsers:
 `npx playwright test`
 
 to run under spesific browser:
+
 `npx playwright test --project=chromium`
 
 `npx playwright test --project=firefox`
