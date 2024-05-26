@@ -8,7 +8,7 @@ export class FilterPage {
     this._root = mainPage.locator("div.filters-overlay");
   }
 
-  private _seeResultsButton(): Locator {
+  private get _seeResultsButton(): Locator {
     return this._root.locator("button.bg-primary");
   }
 
@@ -23,10 +23,15 @@ export class FilterPage {
   }
 
   public async seeResults() {
-    await this._seeResultsButton().click();
+    await this._seeResultsButton.click();
   }
 
   public async getResultsCount(): Promise<number> {
-    return 0;  
+    let countText = await this._seeResultsButton.textContent();
+    if (!countText) {
+      return 0;
+    }
+    countText = /(\d+)/.exec(countText!)![0];
+    return parseInt(countText);
   }
 }

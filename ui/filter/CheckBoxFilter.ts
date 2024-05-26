@@ -16,14 +16,18 @@ export class CheckBoxFilter {
     this._root = locator;
   }
 
-  async getByName(name: string): Promise<CheckBoxFilterItem> {
+  async showMore() {
+    await this._root.locator("button", { hasText: /Show More/ }).click();
+  }
+
+  async showLess() {
+    await this._root.locator("button", { hasText: /Show Less/ }).click();
+  }
+
+  async getByName(name: string): Promise<CheckBoxFilterItem> {   
     const element = this._root.locator(this.ITEM_SELECTOR, {
       hasText: name
     });
-
-    // let isSelected = async () => {
-    //   return (await element.locator("li").getAttribute("aria-selected")) === "true";
-    // }
 
     let expectToggled = async () => {
       await expect(element).toHaveClass(/order-0/);
@@ -34,11 +38,12 @@ export class CheckBoxFilter {
     }
 
     let toggle = async () => {
-        await element.locator("li").click();
+      await element.locator("li").click();
     }
 
     let count = async () => {
-      return 1;
+      const countText = await element.locator("div.text-xs").textContent();
+      return (countText) ? parseInt(countText!.trim()) : 0;
     }
 
     return {
