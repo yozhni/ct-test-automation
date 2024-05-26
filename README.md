@@ -20,6 +20,7 @@ to run under all available browsers:
 
 to run under spesific browser:
 `npx playwright test --project=chromium`
+
 `npx playwright test --project=firefox`
 
 please mind the webkit project is disabled as it's buggy and needs extra time to investigate
@@ -27,6 +28,9 @@ please mind the webkit project is disabled as it's buggy and needs extra time to
 actions job now running all of test cases under chromium and firefox
 
 ## view report
+
+link to report can be copied from Actions page from run:
+<img width="1007" alt="Screenshot 2024-05-26 at 5 01 26 PM" src="https://github.com/yozhni/ct-test-automation/assets/85211615/b6228f9f-b45a-41c2-9489-47fc1bdb93a9">
 
 please note I'm using free account for report portal, so I need to update api key every day to use direct link to report OOTB
 
