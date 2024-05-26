@@ -34,6 +34,9 @@ link to report can be copied from Actions page from run:
 <img width="1007" alt="Screenshot 2024-05-26 at 5 01 26 PM" src="https://github.com/yozhni/ct-test-automation/assets/85211615/b6228f9f-b45a-41c2-9489-47fc1bdb93a9">
 
 please note I'm using free account for report portal, so I need to update api key every day to use direct link to report OOTB
+if you see this error
+<img width="624" alt="Screenshot 2024-05-26 at 9 06 13 PM" src="https://github.com/yozhni/ct-test-automation/assets/85211615/7688fd4c-fcf4-4e82-9474-b58895ac3034">
+please let me know to update token
 
 also, please, mind the report should be refreshed daily as it's using free report portal account
 
